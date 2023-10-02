@@ -3,7 +3,7 @@ import request from "supertest";
 
 describe("healthCheck ", () => {
   test("It should respond 200", async () => {
-    const response = await request(app).get("/healthz");
+    const response = await request(app).all("/healthz");
     expect(response.statusCode).toBe(200);
   });
 });
