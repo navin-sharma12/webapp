@@ -1,5 +1,5 @@
-import app from "../server.js";
-import request from "supertest";
+const app = require ("../server.js");
+const request = require("supertest");
 
 describe("healthCheck ", () => {
   test("It should respond 200", async () => {
