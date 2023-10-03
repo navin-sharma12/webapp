@@ -24,7 +24,6 @@ jobs:
       - run: npm install chai
       - run: npm install mysql
       - run: npm install mocha
-      - run: npm install mysql2
       - run: npm install cors
       - run: npm install dotenv
       - run: npm install express
