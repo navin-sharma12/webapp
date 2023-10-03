@@ -16,5 +16,7 @@ jobs:
         with:
           node-version: 18 # Specify a compatible Node.js version
       - run: npm install
+      - run: npm install mysql
+      - run: npm install sequelize
       - run: npm install mocha -g # Install Mocha globally for running tests
       - run: npm test
