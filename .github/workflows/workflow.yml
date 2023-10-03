@@ -23,11 +23,10 @@ jobs:
       - run: npm init -y
       - run: npm install sequelize
       - run: npm install chai
-      - run: npm install mysql
       - run: npm install mocha
       - run: npm install cors
       - run: npm install dotenv
       - run: npm install express
       - run: npm install supertest
-      - run: npm install
+      - run: npm install mysql
       - run: npm run test

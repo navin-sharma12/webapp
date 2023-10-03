@@ -4,7 +4,7 @@ import db from "../config/dbSetup.js";
 //add a new assignment
 export const addAssignment = async (newDetails) => {
     try {
-        await db.sequelize.sync({ alter: true });
+        await db.sequelize.sync({ create: true });
         const assignment = await db.assignment.create(newDetails);
         return assignment;
     } catch (error) {
