@@ -14,15 +14,6 @@ jobs:
       matrix:
         node-version: [18.x]
 
-    - name: secrets
-      env:
-        env: ${{ secrets.DB_DIALECT }}
-        env: ${{ secrets.DB_HOST }}
-        env: ${{ secrets.DB_PORT}}
-        env: ${{ secrets.DB_USER }}
-        env: ${{ secrets.DB_PASSWORD }}
-        env: ${{ secrets.DB_DATABASE }}
-
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js
