@@ -16,12 +16,12 @@ jobs:
 
     - name: secrets
       env:
-        DB_DIALECT: ${{ secrets.DB_DIALECT }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_PORT: ${{ secrets.DB_PORT}}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        env: ${{ secrets.DB_DIALECT }}
+        env: ${{ secrets.DB_HOST }}
+        env: ${{ secrets.DB_PORT}}
+        env: ${{ secrets.DB_USER }}
+        env: ${{ secrets.DB_PASSWORD }}
+        env: ${{ secrets.DB_DATABASE }}
 
     steps:
       - uses: actions/checkout@v1
