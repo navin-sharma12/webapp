@@ -31,17 +31,17 @@ jobs:
       - run: npm install mysql
       - run: npm install mysql2
       - run: |
-          echo "Dialect: ${{ secrets.dialect }}"
-          echo "Host: ${{ secrets.host }}"
-          echo "Port: ${{ secrets.port }}"
-          echo "User: ${{ secrets.user }}"
-          echo "Password: ${{ secrets.password }}"
-          echo "Database: ${{ secrets.database }}"
+          echo "Dialect: ${{ secrets.env.dialect }}"
+          echo "Host: ${{ secrets.env.host }}"
+          echo "Port: ${{ secrets.env.port }}"
+          echo "User: ${{ secrets.env.user }}"
+          echo "Password: ${{ secrets.env.password }}"
+          echo "Database: ${{ secrets.env.database }}"
       - run: npm run test 
-        env:
-          dialect: ${{ secrets.dialect }}
-          host: ${{ secrets.host }}
-          port: ${{ secrets.port}}
-          user: ${{ secrets.user }}
-          password: ${{ secrets.password }}
-          database: ${{ secrets.database }}
+        with:
+          dialect: ${{ secrets.DIALECT }}
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT}}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          database: ${{ secrets.DATABASE }}
