@@ -29,11 +29,11 @@ jobs:
       - run: npm install express
       - run: npm install supertest
       - run: npm install mysql2
-        env:
-            dialect: ${{ secrets.DIALECT }}
-            host: ${{ secrets.HOST }}
-            port: ${{ secrets.PORT }}
-            user: ${{ secrets.USER }}
-            password: ${{ secrets.PASSWORD }}
-            database: ${{ secrets.DATABASE }}
       - run: npm run test
+        env:
+          dialect: ${{ secrets.DIALECT }}
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          database: ${{ secrets.DATABASE }}
