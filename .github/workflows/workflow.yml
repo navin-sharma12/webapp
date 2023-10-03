@@ -38,7 +38,7 @@ jobs:
           echo "Password: ${{ secrets.env.password }}"
           echo "Database: ${{ secrets.env.database }}"
       - run: npm run test 
-      - name: test values checking
+      - name: test values
         with:
           dialect: ${{ secrets.DIALECT }}
           host: ${{ secrets.HOST }}
