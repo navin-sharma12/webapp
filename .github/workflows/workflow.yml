@@ -21,6 +21,7 @@ jobs:
       - run: npm install chai
       - run: npm install dotenv
       - run: npm install supertest
+      - run: npm install bcrypt
       - run: npm install express
-      - run: npm install mocha -g # Install Mocha globally for running tests
+      - run: npm install mocha # Install Mocha globally for running tests
       - run: npm test
