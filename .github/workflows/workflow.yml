@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.18.0]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Set up environment variables
+        env:
+          DB_DIALECT: ${{ secrets.DB_DIALECT }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT}}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+
+      - name: Check Secrets
+        run: |
+          echo "DB_DIALECT=$DB_DIALECT"
+          echo "DB_HOST=$DB_HOST"
+          echo "DB_PORT=$DB_PORT"
+          echo "DB_USER=$DB_USER"
+          echo "DB_PASSWORD=$DB_PASSWORD"
+          echo "DB_DATABASE=$DB_DATABASE"
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install mocha
+          npm install chai
+          npm install sequelize
+          npm install mysql2
+          npm install express
+          npm install dotenv
+          npm install supertest
+
+      - name: Run tests
+        run: npm run test
