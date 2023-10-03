@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm init -y
       - run: npm install sequelize
       - run: npm install chai
       - run: npm install mysql
