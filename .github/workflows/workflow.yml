@@ -34,7 +34,7 @@ jobs:
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
       - name: Check Secrets
-        run: |
+      - run: |
           echo "DB_DIALECT=$DB_DIALECT"
           echo "DB_HOST=$DB_HOST"
           echo "DB_PORT=$DB_PORT"
@@ -43,7 +43,7 @@ jobs:
           echo "DB_DATABASE=$DB_DATABASE"
 
       - name: Install dependencies
-        run: |
+      - run: |
           npm install
           npm install mocha
           npm install chai
@@ -54,4 +54,4 @@ jobs:
           npm install supertest
 
       - name: Run tests
-        run: npm run test
+      - run: npm run test
