@@ -22,6 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install sequelize
       - run: npm install chai
+      - run: npm install mysql
       - run: npm install mocha
       - run: npm install mysql2
       - run: npm install cors
