@@ -32,26 +32,20 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          
+      - run: echo "DB_DIALECT=$DB_DIALECT"
+      - run: echo "DB_HOST=$DB_HOST"
+      - run: echo "DB_PORT=$DB_PORT"
+      - run: echo "DB_USER=$DB_USER"
+      - run: echo "DB_PASSWORD=$DB_PASSWORD"
+      - run: echo "DB_DATABASE=$DB_DATABASE"
 
-      - name: Check Secrets
-      - run: |
-          echo "DB_DIALECT=$DB_DIALECT"
-          echo "DB_HOST=$DB_HOST"
-          echo "DB_PORT=$DB_PORT"
-          echo "DB_USER=$DB_USER"
-          echo "DB_PASSWORD=$DB_PASSWORD"
-          echo "DB_DATABASE=$DB_DATABASE"
-
-      - name: Install dependencies
-      - run: |
-          npm install
-          npm install mocha
-          npm install chai
-          npm install sequelize
-          npm install mysql2
-          npm install express
-          npm install dotenv
-          npm install supertest
-
-      - name: Run tests
+      - run: npm install
+      - run: npm install mocha
+      - run: npm install chai
+      - run: npm install sequelize
+      - run: npm install mysql2
+      - run: npm install express
+      - run: npm install dotenv
+      - run: npm install supertest
       - run: npm run test
