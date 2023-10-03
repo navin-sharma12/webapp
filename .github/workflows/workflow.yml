@@ -30,4 +30,11 @@ jobs:
       - run: npm install supertest
       - run: npm install mysql
       - run: npm install mysql2
-      - run: npm run test
+      - run: npm run test 
+        env:
+          dialect: ${{ secrets.DIALECT }}
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT}}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          database: ${{ secrets.DATABASE }}
