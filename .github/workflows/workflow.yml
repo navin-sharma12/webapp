@@ -36,13 +36,12 @@ jobs:
           echo "Port: ${{ secrets.env.port }}"
           echo "User: ${{ secrets.env.user }}"
           echo "Password: ${{ secrets.env.password }}"
-          echo "Database: ${{ secrets.env.database }}"
+          echo "Database: ${{ secrets.database }}"
       - run: npm run test 
-      - name: test values
-        with:
-          dialect: ${{ secrets.DIALECT }}
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT}}
-          user: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          database: ${{ secrets.DATABASE }}
+        env:
+          dialect: ${{ secrets.dialect }}
+          host: ${{ secrets.host }}
+          port: ${{ secrets.port}}
+          user: ${{ secrets.user }}
+          password: ${{ secrets.password }}
+          database: ${{ secrets.database }}
