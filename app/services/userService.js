@@ -29,7 +29,7 @@ const initializeDatabase=async () => {
 
         console.log('Database bootstrapped successfully.');
     } catch (error) {
-        console.log('Error bootstrapping the database:');
+        console.log('Error bootstrapping the database:', error);
     }
 }
 
