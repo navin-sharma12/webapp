@@ -23,6 +23,7 @@ jobs:
       - name: Set up environment variables
         env:
           DB_DIALECT: ${{ secrets.DB_DIALECT }}
+          
       - run: npm install
       - run: npm install mocha
       - run: npm install chai
