@@ -20,6 +20,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Set up environment variables
+        env:
+          DB_DIALECT: ${{ secrets.DB_DIALECT }}
       - run: npm install
       - run: npm install mocha
       - run: npm install chai
