@@ -33,15 +33,6 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
-      - name: Check Secrets
-        run: |
-          echo "DB_DIALECT=$DB_DIALECT"
-          echo "DB_HOST=$DB_HOST"
-          echo "DB_PORT=$DB_PORT"
-          echo "DB_USER=$DB_USER"
-          echo "DB_PASSWORD=$DB_PASSWORD"
-          echo "DB_DATABASE=$DB_DATABASE"
-
       - name: Install dependencies
         run: |
           npm install
