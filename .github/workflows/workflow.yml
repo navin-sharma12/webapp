@@ -38,3 +38,10 @@ jobs:
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           database: ${{ secrets.DATABASE }}
+      - run: |
+          echo "Dialect: ${{ secrets.DIALECT }}"
+          echo "Host: ${{ secrets.HOST }}"
+          echo "Port: ${{ secrets.PORT }}"
+          echo "User: ${{ secrets.USER }}"
+          echo "Password: ${{ secrets.PASSWORD }}"
+          echo "Database: ${{ secrets.DATABASE }}"
