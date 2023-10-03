@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  pull_request:
+  pull_request:    
     branches: [main]
 
   workflow_dispatch:
@@ -10,14 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
+    strategy: 
       matrix:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm init -y
@@ -30,26 +30,18 @@ jobs:
       - run: npm install supertest
       - run: npm install mysql
       - run: npm install mysql2
-      - name: Set Environment Variables
-        run: |
-          echo "Dialect: ${{ secrets.DIALECT }}"
-          echo "Host: ${{ secrets.HOST }}"
-          echo "Port: ${{ secrets.PORT }}"
-          echo "User: ${{ secrets.USER }}"
-          echo "Password: ${{ secrets.PASSWORD }}"
-          echo "Database: ${{ secrets.DATABASE }}"
-          export DIALECT="${{ secrets.DIALECT }}"
-          export HOST="${{ secrets.HOST }}"
-          export PORT="${{ secrets.PORT }}"
-          export USER="${{ secrets.USER }}"
-          export PASSWORD="${{ secrets.PASSWORD }}"
-          export DATABASE="${{ secrets.DATABASE }}"
-      - run: npm run test
+      - run: |
+          echo "Dialect: ${{ secrets.env.DIALECT }}"
+          echo "Host: ${{ secrets.env.HOST }}"
+          echo "Port: ${{ secrets.env.PORT }}"
+          echo "User: ${{ secrets.env.USER }}"
+          echo "Password: ${{ secrets.env.PASSWORD }}"
+          echo "Database: ${{ secrets.env.DATABASE }}"
+      - run: npm run test 
         env:
-          DIALECT: ${{ secrets.DIALECT }}
-          HOST: ${{ secrets.HOST }}
-          PORT: ${{ secrets.PORT }}
-          USER: ${{ secrets.USER }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          DATABASE: ${{ secrets.DATABASE }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          dialect: ${{ secrets.dialect }}
+          host: ${{ secrets.host }}
+          port: ${{ secrets.port}}
+          user: ${{ secrets.user }}
+          password: ${{ secrets.password }}
+          database: ${{ secrets.database }}
