@@ -30,6 +30,13 @@ jobs:
       - run: npm install supertest
       - run: npm install mysql
       - run: npm install mysql2
+      - run: |
+          echo "Dialect: ${{ secrets.DIALECT }}"
+          echo "Host: ${{ secrets.HOST }}"
+          echo "Port: ${{ secrets.PORT }}"
+          echo "User: ${{ secrets.USER }}"
+          echo "Password: ${{ secrets.PASSWORD }}"
+          echo "Database: ${{ secrets.DATABASE }}"
       - run: npm run test 
         env:
           dialect: ${{ secrets.DIALECT }}
@@ -38,10 +45,3 @@ jobs:
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           database: ${{ secrets.DATABASE }}
-      - run: |
-          echo "Dialect: ${{ secrets.DIALECT }}"
-          echo "Host: ${{ secrets.HOST }}"
-          echo "Port: ${{ secrets.PORT }}"
-          echo "User: ${{ secrets.USER }}"
-          echo "Password: ${{ secrets.PASSWORD }}"
-          echo "Database: ${{ secrets.DATABASE }}"
