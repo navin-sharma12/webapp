@@ -18,7 +18,7 @@ jobs:
       - run: npm install
       - run: npm install mysql2
       - run: npm install sequelize
-      - run: npm install mocha
+      - run: npm install chai
       - run: npm install dotenv
       - run: npm install supertest
       - run: npm install express
