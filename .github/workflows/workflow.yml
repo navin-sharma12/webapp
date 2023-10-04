@@ -4,40 +4,6 @@ on:
   pull_request:
     branches: [main]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     services:
-#       mysql:
-#         image: mysql:latest
-#         env:
-#           MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
-#           MYSQL_DATABASE: ${{ secrets.DATABASE }}
-#           MYSQL_USER: ${{ secrets.USER }}
-#         ports:
-#           - 3306:8080
-
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Use Node.js
-#         uses: actions/setup-node@v2
-#         with:
-#           node-version: 18.18.0
-
-#       - name: create and configure
-#         run: |
-#           touch .env
-#           echo port=${{ secrets.PORT }} >> .env
-#           echo host=${{ secrets.HOST }} >> .env
-#           echo dialect=${{ secrets.DIALECT }} >> .env
-#           echo user=${{ secrets.USER }} >> .env
-#           echo pd=${{ secrets.PD }} >> .env
-#           echo database=${{ secrets.DATABASE }} >> .env
-
-#       - run: npm ci
-#       - run: npm run test
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,24 +16,12 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.DATABASE }}
           MYSQL_USER: ${{ secrets.USER }}
         ports:
-          - 3306:3306
+          - 3306:8080
 
     steps:
       - name: Initialize MySQL
         run: sudo systemctl start mysql.service
-
-      # - name: Boost user
-      #   run: |
-      #     mysql -e "ALTER USER '${{ secrets.USER }}'@'localhost' \
-      #     IDENTIFIED WITH mysql_native_password BY 'root';" \
-      #     -u${{ secrets.USER }} -p${{ secrets.PD }}
-
-      # - name: check for privilages
-      #   run: mysql -e "mysql -u ${{secrets.USER}} -p -e ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}';"
-
-      # - name: Initialize first database
-      #   run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
-
+        
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v2
@@ -85,5 +39,54 @@ jobs:
           echo database=${{ secrets.DATABASE }} >> .env
 
       - run: npm ci
-      # - run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
       - run: npm run test
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     services:
+#       mysql:
+#         image: mysql:latest
+#         env:
+#           MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
+#           MYSQL_DATABASE: ${{ secrets.DATABASE }}
+#           MYSQL_USER: ${{ secrets.USER }}
+#         ports:
+#           - 3306:3306
+
+#     steps:
+#       - name: Initialize MySQL
+#         run: sudo systemctl start mysql.service
+
+#       # - name: Boost user
+#       #   run: |
+#       #     mysql -e "ALTER USER '${{ secrets.USER }}'@'localhost' \
+#       #     IDENTIFIED WITH mysql_native_password BY 'root';" \
+#       #     -u${{ secrets.USER }} -p${{ secrets.PD }}
+
+#       # - name: check for privilages
+#       #   run: mysql -e "mysql -u ${{secrets.USER}} -p -e ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}';"
+
+#       # - name: Initialize first database
+#       #   run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
+
+#       - uses: actions/checkout@v2
+#       - name: Use Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: 18.18.0
+
+#       - name: create and configure
+#         run: |
+#           touch .env
+#           echo port=${{ secrets.PORT }} >> .env
+#           echo host=${{ secrets.HOST }} >> .env
+#           echo dialect=${{ secrets.DIALECT }} >> .env
+#           echo user=${{ secrets.USER }} >> .env
+#           echo pd=${{ secrets.PD }} >> .env
+#           echo database=${{ secrets.DATABASE }} >> .env
+
+#       - run: npm ci
+#       # - run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
+#       - run: npm run test
