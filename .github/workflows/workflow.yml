@@ -12,7 +12,7 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_ROOT_PASSWORD: "15672N@vin"
           MYSQL_DATABASE: "cloud"
           MYSQL_ROOT_HOST: "%"
         ports:
