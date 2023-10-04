@@ -53,8 +53,7 @@ jobs:
       #     -u${{ secrets.USER }} -p${{ secrets.PD }}
 
       - name: check for privilages
-        run: mysql -e "mysql -u ${{secrets.USER}} -p -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
-"
+        run: mysql -e "mysql -u ${{secrets.USER}} -p -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";"
 
       - name: Initialize first database
         run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
