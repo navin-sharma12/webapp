@@ -16,7 +16,8 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.DATABASE }}
           MYSQL_USER: ${{ secrets.USER }}
         ports:
-          - 3306:8080
+          - 3306:3306
+        # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +26,13 @@ jobs:
         with:
           node-version: 18.18.0
       
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! docker exec mysql mysqladmin ping -u${{ secrets.USER }} -p${{ secrets.PD }} --host 127.0.0.1 --port 3306 --silent; do
+            echo "Waiting for MySQL to start..."
+            sleep 5
+          done
+
       - name: create and configure
         run: |
           touch .env
@@ -32,7 +40,7 @@ jobs:
           echo host=${{ secrets.HOST }} >> .env
           echo dialect=${{ secrets.DIALECT }} >> .env
           echo user=${{ secrets.USER }} >> .env
-          echo pd=${{secrets.PD}} >> .env
+          echo pd=${{ secrets.PD }} >> .env
           echo database=${{ secrets.DATABASE }} >> .env
 
       - run: npm ci
