@@ -1,8 +1,8 @@
-# name: CI
+name: CI
 
-# on:
-#   pull_request:
-#     branches: [main]
+on:
+  pull_request:
+    branches: [main]
 
 # jobs:
 #   build:
@@ -38,30 +38,30 @@
 #       - run: npm ci
 #       - run: npm run test
 
-jobs:
-  check-database-package-json-scripts:
-    runs-on: ubuntu-latest
+  jobs:
+    check-database-package-json-scripts:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Initialize MySQL
-        run: sudo systemctl start mysql.service
+      steps:
+        - name: Initialize MySQL
+          run: sudo systemctl start mysql.service
 
-      - name: Initialize first database
-        run: |
-          mysql -e 'CREATE DATABASE ${{ secrets.DATABASE }};' \
-          -u${{ secrets.USER }} -p${{ secrets.PD }}
+        - name: Initialize first database
+          run: |
+            mysql -e 'CREATE DATABASE ${{ secrets.DATABASE }};' \
+            -u${{ secrets.USER }} -p${{ secrets.PD }}
 
-      - name: Boost user
-        run: |
-          mysql -e "ALTER USER '${{ secrets.USER }}'@'localhost' \
-          IDENTIFIED WITH mysql_native_password BY 'root';" \
-          -u${{ secrets.USER }} -p${{ secrets.PD }}
+        - name: Boost user
+          run: |
+            mysql -e "ALTER USER '${{ secrets.USER }}'@'localhost' \
+            IDENTIFIED WITH mysql_native_password BY 'root';" \
+            -u${{ secrets.USER }} -p${{ secrets.PD }}
 
-      - name: Check out repository code
-        uses: actions/checkout@v3
+        - name: Check out repository code
+          uses: actions/checkout@v3
 
-      - name: run tests
-        run: |
-          MYSQL_USERNAME=$s{{ecrets.USER}} \
-          MYSQL_PASSWORD=${{secrets.PD}} \
-          MYSQL_ACTIVE_DATABASE=${{secrets.DATABASE}} \
+        - name: run tests
+          run: |
+            MYSQL_USERNAME=$s{{ecrets.USER}} \
+            MYSQL_PASSWORD=${{secrets.PD}} \
+            MYSQL_ACTIVE_DATABASE=${{secrets.DATABASE}} \
