@@ -53,7 +53,7 @@ jobs:
       #     -u${{ secrets.USER }} -p${{ secrets.PD }}
 
       - name: check for privilages
-        run: mysql -e "GRANT ALTER, UPDATE ON mysql.* TO 'runner'@'localhost';"
+        run: mysql -e "GRANT ALTER, UPDATE ON mysql.* TO 'root'@'localhost';"
 
       - name: Initialize first database
         run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
