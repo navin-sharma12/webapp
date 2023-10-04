@@ -8,19 +8,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
-          MYSQL_DATABASE: ${{ secrets.DATABASE }}
-          MYSQL_USER: ${{ secrets.USER }}
-        ports:
-          - 3306:3306
-        # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Pull MySQL Docker image
+        run: docker pull mysql:latest
+
+      - name: Start MySQL Service
+        run: docker run --name mysql -e MYSQL_ROOT_PASSWORD=${{ secrets.PD }} -e MYSQL_DATABASE=${{ secrets.DATABASE }} -e MYSQL_USER=${{ secrets.USER }} -d -p 3306:3306 mysql:latest
+        # Add a sleep to allow MySQL to start (adjust the duration as needed)
+        run: sleep 10
+
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
