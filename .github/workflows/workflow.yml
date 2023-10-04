@@ -11,13 +11,13 @@ jobs:
   services:
     mysql:
       image: mysql
-        env:
-          dialect: ${{ secrets.DIALECT }}
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          user: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          database: ${{ secrets.DATABASE }}
+      env:
+        dialect: ${{ secrets.DIALECT }}
+        host: ${{ secrets.HOST }}
+        port: ${{ secrets.PORT }}
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        database: ${{ secrets.DATABASE }}
 
     strategy:
       matrix:
