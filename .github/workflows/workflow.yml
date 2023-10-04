@@ -39,7 +39,7 @@ on:
 #       - run: npm run test
 
   jobs:
-    check-database-package-json-scripts:
+    build:
       runs-on: ubuntu-latest
 
       steps:
