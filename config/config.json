@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "15672N@vin",
-    "database": "database_development",
+    "database": "cloud",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "15672N@vin",
-    "database": "database_test",
+    "database": "cloud",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "15672N@vin",
-    "database": "database_production",
+    "database": "cloud",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
