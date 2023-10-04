@@ -16,7 +16,7 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.DATABASE }}
           MYSQL_USER: ${{ secrets.USER }}
         ports:
-          - 3306:3306
+          - 3306:8080
 
     steps:
       - uses: actions/checkout@v2
