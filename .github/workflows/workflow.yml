@@ -7,9 +7,9 @@ on:
 jobs:
   connect-remote:
     runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-        run: mysql -h localhost --port 3306 -uroot -p15672N@vin -e "SHOW_DATABASES";
+    steps:
+    - uses: actions/checkout@v3
+      run: mysql -h localhost --port 3306 -uroot -p15672N@vin -e "SHOW_DATABASES";
 
     # services:
     #   mysql:
