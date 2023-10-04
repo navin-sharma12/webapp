@@ -45,6 +45,15 @@ jobs:
     steps:
       - name: Initialize MySQL
         run: sudo systemctl start mysql.service
+        services:
+          mysql:
+            image: mysql:latest
+            env:
+              MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
+              MYSQL_DATABASE: ${{ secrets.DATABASE }}
+              MYSQL_USER: ${{ secrets.USER }}
+            ports:
+              - 3306:3306
 
       # - name: Boost user
       #   run: |
