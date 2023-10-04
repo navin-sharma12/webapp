@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --exit __tests__/*.js",
     "start": "node server.js",
-    "db:migrate": "npx sequelize db:migrate"
+    "db:migrate": "npx sequelize db:migrate --env development"
   },
   "keywords": [],
   "type": "module",
