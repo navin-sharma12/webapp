@@ -8,21 +8,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Pull MySQL Docker image
-        run: docker pull mysql:latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
+          MYSQL_DATABASE: ${{ secrets.DATABASE }}
+          MYSQL_USER: ${{ secrets.USER }}
+        ports:
+          - 3306:8080
 
+    steps:
+      - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 18.18.0
-      
-      - name: Wait for MySQL to be ready
-        run: |
-          while ! docker exec mysql mysqladmin ping -u${{ secrets.USER }} -p${{ secrets.PD }} --host 127.0.0.1 --port 3306 --silent; do
-            echo "Waiting for MySQL to start..."
-            sleep 5
-          done
 
       - name: create and configure
         run: |
