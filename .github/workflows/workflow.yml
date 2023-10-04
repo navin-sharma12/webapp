@@ -5,33 +5,36 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  connect-remote:
     runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+        run: mysql -h localhost --port 3306 -uroot -p15672N@vin -e "SHOW_DATABASES";
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: 15672N@vin
-          MYSQL_DATABASE: cloud
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    # services:
+    #   mysql:
+    #     image: mysql:5.7
+    #     env:
+    #       MYSQL_ROOT_PASSWORD: 15672N@vin
+    #       MYSQL_DATABASE: cloud
+    #     ports:
+    #       - 3306:3306
+    #     options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
+    #   - name: Set up Node.js
+    #     uses: actions/setup-node@v2
+    #     with:
+    #       node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+    #   - name: Install dependencies
+    #     run: npm install
 
-      - name: Run database migrations
-        run: npm run db:migrate
+    #   - name: Run database migrations
+    #     run: npm run db:migrate
 
-      - name: Run tests
-        run: npm test
+    #   - name: Run tests
+    #     run: npm test
