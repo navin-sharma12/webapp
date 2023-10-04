@@ -8,16 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-  services:
-    mysql:
-      image: mysql
-      env:
-        dialect: ${{ secrets.DIALECT }}
-        host: ${{ secrets.HOST }}
-        port: ${{ secrets.PORT }}
-        user: ${{ secrets.USER }}
-        password: ${{ secrets.PASSWORD }}
-        database: ${{ secrets.DATABASE }}
+    services:
+      mysql:
+        image: mysql
+        env:
+          dialect: ${{ secrets.DIALECT }}
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          database: ${{ secrets.DATABASE }}
 
     strategy:
       matrix:
