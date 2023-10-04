@@ -16,7 +16,7 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.DATABASE }}
           MYSQL_USER: ${{ secrets.USER }}
         ports:
-          - 3306/tcp
+          - 8080
 
     steps:
       - name: Initialize MySQL
