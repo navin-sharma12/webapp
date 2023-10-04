@@ -13,7 +13,7 @@ jobs:
         run: docker pull mysql:latest
 
       - name: Start MySQL Service
-      - run: docker run --name mysql -e MYSQL_ROOT_PASSWORD=${{ secrets.PD }} -e MYSQL_DATABASE=${{ secrets.DATABASE }} -e MYSQL_USER=${{ secrets.USER }} -d -p 3306:3306 mysql:latest
+        run: docker run --name mysql -e MYSQL_ROOT_PASSWORD=${{ secrets.PD }} -e MYSQL_DATABASE=${{ secrets.DATABASE }} -e MYSQL_USER=${{ secrets.USER }} -d -p 3306:3306 mysql:latest
       - run: sleep 10
 
       - name: Use Node.js
