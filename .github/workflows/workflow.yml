@@ -8,16 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql
-        env:
-          dialect: ${{ secrets.DIALECT }}
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          user: ${{ secrets.USER }}
-          pd: ${{ secrets.PD }}
-          database: ${{ secrets.DATABASE }}
+    # services:
+    #   mysql:
+    #     image: mysql
+    #     env:
+    #       dialect: ${{ secrets.DIALECT }}
+    #       host: ${{ secrets.HOST }}
+    #       port: ${{ secrets.PORT }}
+    #       user: ${{ secrets.USER }}
+    #       pd: ${{ secrets.PD }}
+    #       database: ${{ secrets.DATABASE }}
 
     steps:
       - uses: actions/checkout@v2
@@ -26,17 +26,17 @@ jobs:
         with:
           node-version: 18.18.0
       
-      - name: create and configure
-        run: |
-          touch .env
-          echo port=${{ secrets.PORT }} >> .env
-          echo host=${{ secrets.HOST }} >> .env
-          echo dialect=${{ secrets.DIALECT }} >> .env
-          echo user=${{ secrets.USER }} >> .env
-          echo pd=${{secrets.PD}} >> .env
-          echo database=${{ secrets.DATABASE }} >> .env
+      # - name: create and configure
+      #   run: |
+      #     touch .env
+      #     echo port=${{ secrets.PORT }} >> .env
+      #     echo host=${{ secrets.HOST }} >> .env
+      #     echo dialect=${{ secrets.DIALECT }} >> .env
+      #     echo user=${{ secrets.USER }} >> .env
+      #     echo pd=${{secrets.PD}} >> .env
+      #     echo database=${{ secrets.DATABASE }} >> .env
 
       - run: npm ci
-      - run: pwd 
-      - run: ls && cat .env
+      # - run: pwd 
+      # - run: ls && cat .env
       - run: npm run test
