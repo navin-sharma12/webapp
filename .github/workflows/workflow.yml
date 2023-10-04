@@ -53,7 +53,7 @@ jobs:
       #     -u${{ secrets.USER }} -p${{ secrets.PD }}
 
       - name: Initialize first database
-        run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
+        run: mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '15672N@vin'";
 
       - name: Check out repository code
         uses: actions/checkout@v3
