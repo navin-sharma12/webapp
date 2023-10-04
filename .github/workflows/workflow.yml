@@ -75,4 +75,5 @@ jobs:
           echo database=${{ secrets.DATABASE }} >> .env
 
       - run: npm ci
+      - run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
       - run: npm run test
