@@ -52,8 +52,11 @@ jobs:
       #     IDENTIFIED WITH mysql_native_password BY 'root';" \
       #     -u${{ secrets.USER }} -p${{ secrets.PD }}
 
+      - name: check for privilages
+        run: mysql -e "GRANT ALTER, UPDATE ON mysql.* TO 'runner'@'localhost';"
+
       - name: Initialize first database
-        run: mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '15672N@vin'";
+        run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
 
       - name: Check out repository code
         uses: actions/checkout@v3
