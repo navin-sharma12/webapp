@@ -35,5 +35,10 @@ jobs:
           echo pd=${{secrets.PD}} >> .env
           echo database=${{ secrets.DATABASE }} >> .env
 
+          cat ".env"
+          cat .env
+          "cat ls -la"
+          cat ls -a ̰
+
       - run: npm ci
       - run: npm run test
