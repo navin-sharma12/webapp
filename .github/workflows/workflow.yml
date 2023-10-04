@@ -55,17 +55,24 @@ jobs:
       # - name: check for privilages
       #   run: mysql -e "mysql -u ${{secrets.USER}} -p -e ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}';"
 
-      - name: Initialize first database
-        run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
+      # - name: Initialize first database
+      #   run: mysql -e "ALTER USER '${{secrets.USER}}'@'localhost' IDENTIFIED BY '${{secrets.PD}}'";
 
-      - name: Check out repository code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.18.0
 
-      - name: run tests
+      - name: create and configure
         run: |
-          MYSQL_USERNAME=${{secrets.USER}} \
-          MYSQL_PASSWORD=${{secrets.PD}} \
-          MYSQL_ACTIVE_DATABASE=${{secrets.DATABASE}} \
-        
+          touch .env
+          echo port=${{ secrets.PORT }} >> .env
+          echo host=${{ secrets.HOST }} >> .env
+          echo dialect=${{ secrets.DIALECT }} >> .env
+          echo user=${{ secrets.USER }} >> .env
+          echo pd=${{ secrets.PD }} >> .env
+          echo database=${{ secrets.DATABASE }} >> .env
+
       - run: npm ci
       - run: npm run test
