@@ -36,6 +36,4 @@ jobs:
           echo database=${{ secrets.DATABASE }} >> .env
 
       - run: npm ci
-      # - run: pwd 
-      # - run: ls && cat .env
       - run: npm run test
