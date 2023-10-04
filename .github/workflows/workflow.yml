@@ -12,8 +12,8 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
-          MYSQL_DATABASE: ${{ secrets.DATABASE }}
+          MYSQL_ROOT_PASSWORD: 15672N@vin
+          MYSQL_DATABASE: cloud
         ports:
           - 3306
 
