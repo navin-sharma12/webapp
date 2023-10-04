@@ -4,7 +4,7 @@ import { Sequelize } from 'sequelize';
 import config from '../config/dbConfig.js';
 
 const sequelize = new Sequelize(
-    `${config.database.dialect}://${config.database.user}:${config.database.password}@${config.database.host}/${config.database.database}`
+    `${config.database.dialect}://${config.database.user}:${config.database.pd}@${config.database.host}/${config.database.database}`
 );
 
 let db = {}
