@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --exit __tests__/*.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "db:migrate": "sequelize db:migrate"
   },
   "keywords": [],
   "type": "module",
