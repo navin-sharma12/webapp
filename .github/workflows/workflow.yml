@@ -14,9 +14,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.PD }}
           MYSQL_DATABASE: ${{ secrets.DATABASE }}
-          MYSQL_USER: ${{ secrets.USER }}
         ports:
-          - 8080
+          - 3306
 
     steps:
       - name: Initialize MySQL
