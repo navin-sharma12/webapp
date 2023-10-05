@@ -4,10 +4,9 @@ import bcrypt from "bcrypt";
 const userModel = (sequelize) => {
     let User = sequelize.define("user", {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
         },
         first_name: {
             type: DataTypes.STRING,
@@ -37,9 +36,6 @@ const userModel = (sequelize) => {
     },
         {
             timestamps: false,
-        },
-        {
-            initialAutoIncrement: 1,
         });
 
     // Define a hook on the User model to hash the password before saving
