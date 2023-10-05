@@ -9,7 +9,7 @@ const accountUpdatedString = currentDate.toISOString();
 const initializeDatabase=async () => {
     try {
         // Sync the database to create tables if they don't exist
-        await db.sequelize.sync({ create: true }); // Use alter: true to update existing schema
+        await db.sequelize.sync({ alter: true }); // Use alter: true to update existing schema
 
         // Load and insert data from CSV files
         const csvData = fs.readFileSync(path.join('/root/opt/webapp/users.csv'), 'utf-8');
@@ -29,7 +29,7 @@ const initializeDatabase=async () => {
 
         console.log('Database bootstrapped successfully.');
     } catch (error) {
-        console.log('Error bootstrapping the database:', error);
+        console.log('');
     }
 }
 

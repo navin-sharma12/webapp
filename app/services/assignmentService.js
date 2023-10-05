@@ -4,12 +4,12 @@ import db from "../config/dbSetup.js";
 //add a new assignment
 export const addAssignment = async (newDetails) => {
     try {
-        await db.sequelize.sync({ create: true });
+        await db.sequelize.sync({ alter: true });
         const assignment = await db.assignment.create(newDetails);
         return assignment;
     } catch (error) {
         console.error("Error creating assignment:");
-        throw error; // You might want to handle errors more gracefully
+        throw error;
     }
 }
 
@@ -23,9 +23,7 @@ export const removeAssignment = async (id) => {
 //get all athe assignments
 export const getAllAssignments = async (user_id) => {
     try {
-        const assignments = await db.assignment.findAll({
-            where: { user_id: user_id },
-        });
+        const assignments = await db.assignment.findAll();
         return assignments;
     } catch (error) {
         return null;
@@ -36,7 +34,7 @@ export const getAllAssignments = async (user_id) => {
 export const getAssignmentById = async (user_id, id) => {
     try {
         const assignments = await db.assignment.findOne({
-            where: { user_id: user_id, id: id },
+            where: { id: id },
         });
         return assignments;
     } catch (error) {
