@@ -3,10 +3,9 @@ import { DataTypes } from "sequelize";
 const assignmentModel = (sequelize) => {
     let Assignment = sequelize.define('assignment', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -40,9 +39,6 @@ const assignmentModel = (sequelize) => {
     },
         {
             timestamps: false,
-        },
-        {
-            initialAutoIncrement: 1,
         });
     return Assignment;
 }
