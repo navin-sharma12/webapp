@@ -8,7 +8,7 @@ export const post = async (request, response) => {
     if (health !== true) {
         return response.status(503).header('Cache-Control', 'no-cache, no-store, must-revalidate').send('');
     }
-    
+
     const authHeader = request.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Basic ')) {
@@ -30,8 +30,22 @@ export const post = async (request, response) => {
         newDetails.user_id = authenticated;
         newDetails.assignment_created = new Date().toISOString();
         newDetails.assignment_updated = new Date().toISOString();
-        const savedDetails = await addAssignment(newDetails);
-        return response.status(200).send('');
+        if (
+            bodyKeys.some(
+                (bodyVal) =>
+                    ![
+                        "name",
+                        "points",
+                        "num_of_attempts",
+                        "deadline",
+                    ].includes(bodyVal)
+            )
+        ) {
+            response.status(400).send("");
+        } else {
+            const savedDetails = await addAssignment(newDetails);
+            return response.status(201).send('');
+        }
     } catch (error) {
         return response.status(400).send('');
     }
@@ -101,10 +115,10 @@ export const getAssignmentUsingId = async (request, response) => {
         return response.status(401).send('');
     }
 
-    const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
-    if (assignment.user_id != authenticated) {
-        return response.status(401).send('');
-    }
+    // const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
+    // if (assignment.user_id != authenticated) {
+    //     return response.status(401).send('');
+    // }
 
     try {
         const id = request.params.id;
@@ -149,7 +163,7 @@ export const updatedAssignment = async (request, response) => {
 
     const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
     if (assignment.user_id != authenticated) {
-        return response.status(401).send('');
+        return response.status(403).send('');
     }
 
     try {
@@ -189,7 +203,7 @@ export const remove = async (request, response) => {
 
     const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
     if (assignment.user_id != authenticated) {
-        return response.status(401).send('');
+        return response.status(403).send('');
     }
 
     try {
