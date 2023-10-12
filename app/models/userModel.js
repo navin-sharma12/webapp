@@ -1,5 +1,4 @@
 import { DataTypes } from "sequelize";
-import bcrypt from "bcrypt";
 
 const userModel = (sequelize) => {
     let User = sequelize.define("user", {
@@ -37,13 +36,6 @@ const userModel = (sequelize) => {
         {
             timestamps: false,
         });
-
-    // Define a hook on the User model to hash the password before saving
-    User.beforeCreate((user) => {
-        if(user.password) {
-            user.password = bcrypt.hashSync(user.password, 12);
-        }
-    });
 
     return User;
 }

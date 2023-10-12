@@ -8,7 +8,7 @@ const assignmentModel = (sequelize) => {
             primaryKey: true,
         },
         user_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
         },
         name: {
             type: DataTypes.STRING,

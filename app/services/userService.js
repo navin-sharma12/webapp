@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import db from "../config/dbSetup.js"
+import db from "../config/dbSetup.js";
+import bcrypt from "bcrypt";
 
 const currentDate = new Date();
 const accountCreatedString = currentDate.toISOString();
@@ -17,15 +18,16 @@ const initializeDatabase=async () => {
 
         for (let i = 1; i < rows.length; i++) {
             const [first_name, last_name, emailid, password] = rows[i];
+            const hashedPassword = bcrypt.hashSync(password, 12);
             await db.user.create({
                 first_name,
                 last_name,
                 emailid,
-                password,
+                password: hashedPassword,
                 account_created: accountCreatedString,
                 account_updated: accountUpdatedString
             });
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
         console.log('Database bootstrapped successfully.');
     } catch (error) {
