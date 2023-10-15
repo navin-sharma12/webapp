@@ -1,17 +1,17 @@
-name: MySQL Integration Test
+name: AMI format test
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  jobs:
+  connect-remote:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
       - name: create and configure
         run: |
           touch .env

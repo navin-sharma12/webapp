@@ -1,4 +1,4 @@
-name: MySQL Integration Test
+name: AMI validation test
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: create and configure
         run: |
           touch .env

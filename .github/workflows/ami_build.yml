@@ -1,4 +1,4 @@
-name: MySQL Integration Test
+name: AMI build
 
 on:
   push:
