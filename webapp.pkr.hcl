@@ -63,6 +63,11 @@ build {
     "source.amazon-ebs.webapp"
   ]
 
+  provisioner "file" {
+    source = "./users.csv"
+    destination = "/root/opt/webapp/users.csv"
+  }
+
   provisioner "shell" {
     script = "./app.sh"
   }

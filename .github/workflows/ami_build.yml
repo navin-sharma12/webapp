@@ -1,0 +1,37 @@
+name: MySQL Integration Test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  connect-remote:
+    runs-on: ubuntu-latest
+
+    services:
+      - name: create and configure
+        run: |
+          touch .env
+          echo port=${{ secrets.PORT }} >> .env
+          echo host=${{ secrets.HOST }} >> .env
+          echo dialect=${{ secrets.DIALECT }} >> .env
+          echo user=${{ secrets.USER }} >> .env
+          echo pd=${{ secrets.PD }}>> .env
+          echo database=${{ secrets.DATABASE }} >> .env
+
+      - name: Install Packer
+        run: |
+          wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
+          unzip packer_1.7.2_linux_amd64.zip
+          chmod +x packer
+          sudo mv packer /usr/local/bin/
+          packer version
+      
+      - name: zip all files
+        run: zip -r webapp.zip .
+
+      - name: Run Packer pulgin installation
+        run: packer init .
+
+      - name: Run Packer file
+        run: packer build webapp.pkr.hcl
