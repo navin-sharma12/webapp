@@ -1,0 +1,6 @@
+name: securityGroup
+runtime:
+  name: nodejs
+  options:
+    typescript: false
+description: creating security group and ec2 instance

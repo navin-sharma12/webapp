@@ -33,3 +33,17 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Install Packer
+        run: |
+          wget https://releases.hashicorp.com/packer/1.7.6/packer_1.7.6_linux_amd64.zip
+          unzip packer_1.7.6_linux_amd64.zip
+          sudo mv packer /usr/local/bin/
+        if: success()
+
+      - name: Format Packer Template
+        run: packer fmt .
+        # continue-on-error: true
+
+      - name: Validate Packer Template
+        run: packer validate .
