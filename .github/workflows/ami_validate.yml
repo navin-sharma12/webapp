@@ -8,7 +8,10 @@ jobs:
   connect-remote:
     runs-on: ubuntu-latest
 
-    services:
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: create and configure
         run: |
           touch .env
