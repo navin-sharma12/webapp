@@ -33,3 +33,9 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Run Packer fmt
+        run: packer fmt -check .
+
+      - name: Run Packer validate
+        run: packer validate .
