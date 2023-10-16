@@ -2,6 +2,7 @@
 
 sleep 30
 
+mkdir opt
 sudo apt install unzip
 sudo apt install nodejs npm -y
 sudo apt install mariadb-server -y
