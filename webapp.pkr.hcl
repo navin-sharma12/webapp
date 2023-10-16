@@ -65,7 +65,12 @@ build {
 
   provisioner "file" {
     source      = "./users.csv"
-    destination = "/root/opt/webapp/users.csv"
+    destination = "/home/admin/users.csv"
+  }
+
+  provisioner "file" {
+    source = "../webapp.zip"
+    destination = "/home/admin/webapp.zip"
   }
 
   provisioner "shell" {
