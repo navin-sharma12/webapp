@@ -69,7 +69,7 @@ build {
   }
 
   provisioner "file" {
-    source = "../webapp.zip"
+    source = "./webapp.zip"
     destination = "/home/admin/webapp.zip"
   }
 
