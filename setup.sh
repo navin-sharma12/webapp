@@ -1,9 +1,5 @@
 #!/bin/sh
 
-echo "PASSWORD=${PD}"
-echo "DATABASE=${DATABASE}"
-echo "USER=${USER}"
-
 sudo apt-get u{PD}ate
 sudo apt-get upgrade -y
 sudo apt install unzip
