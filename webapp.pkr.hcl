@@ -17,11 +17,6 @@ variable "ssh_username" {
   default = "admin"
 }
 
-variable "subnet_id" {
-  type    = string
-  default = "subnet-005fd51a56ac28586"
-}
-
 variable "USER" {
   type    = string
   default = "${env("USER")}"
@@ -35,6 +30,11 @@ variable "DATABASE" {
 variable "PD" {
   type    = string
   default = "${env("PD")}"
+}
+
+variable "aws_account_ids" {
+  type        = list(string)
+  default     = ["412145925921", "706231857636"]
 }
 
 source "amazon-ebs" "webapp" {
@@ -62,7 +62,6 @@ source "amazon-ebs" "webapp" {
 
   instance_type = "t2.micro"
   ssh_username  = "admin"
-  subnet_id     = var.subnet_id
 
   launch_block_device_mappings {
     device_name           = "/dev/xvda"
@@ -96,4 +95,7 @@ build {
       "USER=${var.USER}"
     ]
   }
+
+  ami_users = var.aws_account_ids
+
 }
