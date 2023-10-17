@@ -54,6 +54,10 @@ source "amazon-ebs" "webapp" {
   ami_name        = "csye6225_iac_and_webapp_ami"
   ami_description = "AMI for CSYE6225"
   region          = "us-east-1"
+  ami_users = [
+    "412145925921",
+    "706231857636"
+  ]
 
   aws_polling {
     delay_seconds = 120
@@ -69,12 +73,6 @@ source "amazon-ebs" "webapp" {
     volume_type           = "gp2"
     delete_on_termination = true
   }
-
-  ami_users = [
-    "412145925921",
-    "706231857636"
-  ]
-
 }
 
 
