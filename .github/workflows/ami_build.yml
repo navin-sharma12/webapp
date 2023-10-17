@@ -44,4 +44,11 @@ jobs:
         run: packer init .
 
       - name: Run Packer file
-        run: packer build webapp.pkr.hcl
+        run: |
+          export PORT=${{ secrets.PORT }}
+          export HOST=${{ secrets.HOST }}
+          export DIALECT=${{ secrets.DIALECT }}
+          export USER=${{ secrets.USER }}
+          export PD=${{ secrets.PD }}
+          export DATABASE=${{ secrets.DATABASE }}
+          packer build -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' webapp.pkr.hcl

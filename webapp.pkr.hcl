@@ -22,6 +22,21 @@ variable "subnet_id" {
   default = "subnet-005fd51a56ac28586"
 }
 
+variable "USER" {
+  type    = string
+  default = "${env("USER")}"
+}
+
+variable "DATABASE" {
+  type    = string
+  default = "${env("DATABASE")}"
+}
+
+variable "PD" {
+  type    = string
+  default = "${env("PD")}"
+}
+
 source "amazon-ebs" "webapp" {
   source_ami_filter {
     most_recent = true
@@ -36,7 +51,7 @@ source "amazon-ebs" "webapp" {
     owners = ["amazon"]
   }
 
-  ami_name        = "amazon ami"
+  ami_name        = "csye6225_iac_and_webapp_ami"
   ami_description = "AMI for CSYE6225"
   region          = "us-east-1"
 
@@ -75,5 +90,10 @@ build {
 
   provisioner "shell" {
     script = "./setup.sh"
+    environment_vars = [
+      "PD=${var.PD}",
+      "DATABASE=${var.DATABASE}",
+      "USER=${var.USER}"
+    ]
   }
 }
