@@ -73,6 +73,14 @@ source "amazon-ebs" "webapp" {
     volume_type           = "gp2"
     delete_on_termination = true
   }
+<<<<<<< HEAD
+=======
+
+  ami_users = [
+    "412145925921",
+    "706231857636"
+  ]
+>>>>>>> dbde8d4ef6bc58c5cb370a425c04fcfd2ca477aa
 }
 
 
@@ -99,4 +107,7 @@ build {
       "USER=${var.USER}"
     ]
   }
+
+  ami_users = var.aws_account_ids
+
 }
