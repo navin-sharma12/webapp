@@ -99,7 +99,4 @@ build {
       "USER=${var.USER}"
     ]
   }
-
-  ami_users = var.aws_account_ids
-
 }
