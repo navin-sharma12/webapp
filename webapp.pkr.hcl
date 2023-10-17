@@ -70,7 +70,10 @@ source "amazon-ebs" "webapp" {
     delete_on_termination = true
   }
 
-  ami_users = var.aws_account_ids
+  ami_users = [
+    "412145925921",
+    "706231857636"
+  ]
 }
 
 
