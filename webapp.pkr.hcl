@@ -74,7 +74,6 @@ source "amazon-ebs" "webapp" {
     "412145925921",
     "706231857636"
   ]
-
 }
 
 
@@ -101,4 +100,7 @@ build {
       "USER=${var.USER}"
     ]
   }
+
+  ami_users = var.aws_account_ids
+
 }
