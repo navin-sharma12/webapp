@@ -69,6 +69,8 @@ source "amazon-ebs" "webapp" {
     volume_type           = "gp2"
     delete_on_termination = true
   }
+
+  ami_users = var.aws_account_ids
 }
 
 
@@ -95,7 +97,4 @@ build {
       "USER=${var.USER}"
     ]
   }
-
-  ami_users = var.aws_account_ids
-
 }
