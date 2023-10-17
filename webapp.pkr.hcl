@@ -42,7 +42,7 @@ source "amazon-ebs" "webapp" {
     most_recent = true
 
     filters = {
-      name                = "debian-12-amd64*"
+      name                = "debian-12-*"
       architecture        = "x86_64"
       root-device-name    = "/dev/xvda"
       root-device-type    = "ebs"
