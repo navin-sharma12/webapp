@@ -17,6 +17,41 @@ packer {
 #   default = "admin"
 # }
 
+variable "source_ami" {
+  type    = string
+  default = ""
+}
+
+variable "ami_name" {
+  type    = string
+  default = ""
+}
+
+variable "instance_type" {
+  type    = string
+  default = ""
+}
+
+variable "launch_block_device_mappings_device_name" {
+  type    = string
+  default = ""
+}
+
+variable "launch_block_device_mappings_volume_size" {
+  type    = number
+  default = null
+}
+
+variable "launch_block_device_mappings_volume_type" {
+  type    = string
+  default = ""
+}
+
+variable "launch_block_device_mappings_delete_on_termination" {
+  type    = bool
+  default = null
+}
+
 variable "USER" {
   type    = string
   default = "${env("USER")}"
