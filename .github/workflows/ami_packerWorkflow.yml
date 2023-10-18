@@ -35,3 +35,6 @@ jobs:
 
       - name: Run Packer fmt
         run: packer fmt -check .
+
+      - name: Run Packer validate
+        run: packer validate -var-file="variableFile.pkrvars.hcl" -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' webapp.pkr.hcl
