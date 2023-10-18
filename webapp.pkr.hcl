@@ -103,8 +103,8 @@ variable "PD" {
 }
 
 variable "ami_users" {
-  type        = list(string)
-  default     = ["412145925921", "706231857636"]
+  type    = list(string)
+  default = null
 }
 
 source "amazon-ebs" "webapp" {
@@ -112,8 +112,8 @@ source "amazon-ebs" "webapp" {
 
   ami_name        = "${var.ami_name}"
   ami_description = "${var.ami_description}"
-  region          = "${var.region}"
-  ami_users = "${var.ami_users}"
+  region          = "${var.aws_region}"
+  ami_users       = "${var.ami_users}"
 
   instance_type = "${var.instance_type}"
   ssh_username  = "${var.ssh_username}"
@@ -129,7 +129,7 @@ source "amazon-ebs" "webapp" {
 
 build {
   sources = [
-    "${var.build_sources}"
+    "source.amazon-ebs.webapp"
   ]
 
   provisioner "file" {
