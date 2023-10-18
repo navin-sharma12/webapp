@@ -2,7 +2,7 @@ name: AMI build
 
 on:
   push:
-    branches: [demo]
+    branches: [main]
 
 jobs:
   connect-remote:

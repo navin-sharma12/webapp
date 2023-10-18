@@ -2,9 +2,9 @@ name: AMI format test
 
 on:
   pull_request:
-    branches: [demo]
+    branches: [main]
   push:
-    branches: [demo]
+    branches: [main]
 
 jobs:
   connect-remote:
