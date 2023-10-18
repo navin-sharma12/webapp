@@ -48,32 +48,32 @@ variable "launch_block_device_mappings_delete_on_termination" {
 }
 
 variable "build_sources" {
-  type    = bool
+  type    = string
   default = null
 }
 
 variable "provisioner_csv_source" {
-  type    = bool
+  type    = string
   default = null
 }
 
 variable "provisioner_csv_destination" {
-  type    = bool
+  type    = string
   default = null
 }
 
 variable "provisioner_webapp_source" {
-  type    = bool
+  type    = string
   default = null
 }
 
 variable "provisioner_webapp_destination" {
-  type    = bool
+  type    = string
   default = null
 }
 
 variable "script" {
-  type    = bool
+  type    = string
   default = null
 }
 
