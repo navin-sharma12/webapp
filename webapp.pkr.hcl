@@ -22,22 +22,12 @@ variable "source_ami" {
   default = null
 }
 
-variable "ami_name" {
-  type    = string
-  default = null
-}
-
 variable "ami_description" {
   type    = string
   default = null
 }
 
 variable "instance_type" {
-  type    = string
-  default = null
-}
-
-variable "launch_block_device_mappings_device_name" {
   type    = string
   default = null
 }
@@ -87,38 +77,13 @@ variable "script" {
   default = null
 }
 
-variable "source_ami" {
-  type    = string
-  default = null
-}
-
 variable "ami_name" {
-  type    = string
-  default = null
-}
-
-variable "instance_type" {
   type    = string
   default = null
 }
 
 variable "launch_block_device_mappings_device_name" {
   type    = string
-  default = null
-}
-
-variable "launch_block_device_mappings_volume_size" {
-  type    = number
-  default = null
-}
-
-variable "launch_block_device_mappings_volume_type" {
-  type    = string
-  default = null
-}
-
-variable "launch_block_device_mappings_delete_on_termination" {
-  type    = bool
   default = null
 }
 
