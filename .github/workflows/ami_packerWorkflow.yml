@@ -1,8 +1,8 @@
-name: AMI validation test
+name: AMI format test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [demo]
 
 jobs:
   connect-remote:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
       - name: create and configure
         run: |
           touch .env
@@ -29,9 +29,15 @@ jobs:
           chmod +x packer
           sudo mv packer /usr/local/bin/
           packer version
+
+      - name: zip all files
+        run: zip -r webapp.zip .
       
       - name: Run Packer pulgin installation
         run: packer init .
 
+      - name: Run Packer fmt
+        run: packer fmt -check .
+
       - name: Run Packer validate
-        run: packer validate .
+        run: packer validate -var-file="variableFile.pkrvars.hcl" -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' webapp.pkr.hcl
