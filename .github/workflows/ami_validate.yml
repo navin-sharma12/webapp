@@ -34,4 +34,4 @@ jobs:
         run: packer init .
 
       - name: Run Packer validate
-        run: packer -var-file="variableFile.pkrvars.hcl" validate .
+        run: packer validate -var-file="variableFile.pkrvars.hcl" .
