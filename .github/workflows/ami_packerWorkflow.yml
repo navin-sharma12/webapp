@@ -30,8 +30,8 @@ jobs:
           sudo mv packer /usr/local/bin/
           packer version
 
-      # - name: zip all files
-      #   run: zip -r webapp.zip .
+      - name: zip all files
+        run: zip -r webapp.zip .
       
       - name: Run Packer pulgin installation
         run: packer init .
