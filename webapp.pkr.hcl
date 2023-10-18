@@ -51,20 +51,20 @@ source "amazon-ebs" "webapp" {
   #   owners = ["amazon"]
   # }
 
-  source_ami = "${source_ami}"
+  source_ami = "${var.source_ami}"
 
-  ami_name        = "${ami_name}"
-  ami_description = "${ami_description}"
-  region          = "${region}"
-  ami_users = "${ami_users}"
+  ami_name        = "${var.ami_name}"
+  ami_description = "${var.ami_description}"
+  region          = "${var.region}"
+  ami_users = "${var.ami_users}"
 
   # aws_polling {
   #   delay_seconds = 120
   #   max_attempts  = 50
   # }
 
-  instance_type = "${instance_type}"
-  ssh_username  = "${ssh_username}"
+  instance_type = "${var.instance_type}"
+  ssh_username  = "${var.ssh_username}"
 
   launch_block_device_mappings {
     device_name           = "${var.launch_block_device_mappings_device_name}"
@@ -77,7 +77,7 @@ source "amazon-ebs" "webapp" {
 
 build {
   sources = [
-    "source.amazon-ebs.webapp"
+    "${var.build_sources}"
   ]
 
   provisioner "file" {
