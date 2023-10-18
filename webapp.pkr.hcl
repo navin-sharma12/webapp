@@ -107,6 +107,11 @@ variable "ami_users" {
   default = null
 }
 
+variable "ami_regions" {
+  type    = list(string)
+  default = null
+}
+
 source "amazon-ebs" "webapp" {
   source_ami = "${var.source_ami}"
 
@@ -114,6 +119,7 @@ source "amazon-ebs" "webapp" {
   ami_description = "${var.ami_description}"
   region          = "${var.aws_region}"
   ami_users       = "${var.ami_users}"
+  ami_regions     = "${var.ami_regions}"
 
   instance_type = "${var.instance_type}"
   ssh_username  = "${var.ssh_username}"
