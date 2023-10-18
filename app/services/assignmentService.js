@@ -21,7 +21,7 @@ export const removeAssignment = async (id) => {
 }
 
 //get all athe assignments
-export const getAllAssignments = async (user_id) => {
+export const getAllAssignments = async () => {
     try {
         const assignments = await db.assignment.findAll();
         return assignments;
@@ -31,7 +31,7 @@ export const getAllAssignments = async (user_id) => {
 }
 
 //get all athe assignments
-export const getAssignmentById = async (user_id, id) => {
+export const getAssignmentById = async (id) => {
     try {
         const assignments = await db.assignment.findOne({
             where: { id: id },
