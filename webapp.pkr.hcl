@@ -7,34 +7,39 @@ packer {
   }
 }
 
-# variable "aws_region" {
-#   type    = string
-#   default = "us-east-1"
-# }
+variable "aws_region" {
+  type    = string
+  default = null
+}
 
-# variable "ssh_username" {
-#   type    = string
-#   default = "admin"
-# }
+variable "ssh_username" {
+  type    = string
+  default = null
+}
 
 variable "source_ami" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "ami_name" {
   type    = string
-  default = ""
+  default = null
+}
+
+variable "ami_description" {
+  type    = string
+  default = null
 }
 
 variable "instance_type" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "launch_block_device_mappings_device_name" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "launch_block_device_mappings_volume_size" {
@@ -44,10 +49,40 @@ variable "launch_block_device_mappings_volume_size" {
 
 variable "launch_block_device_mappings_volume_type" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "launch_block_device_mappings_delete_on_termination" {
+  type    = bool
+  default = null
+}
+
+variable "build_sources" {
+  type    = bool
+  default = null
+}
+
+variable "provisioner_csv_source" {
+  type    = bool
+  default = null
+}
+
+variable "provisioner_csv_destination" {
+  type    = bool
+  default = null
+}
+
+variable "provisioner_webapp_source" {
+  type    = bool
+  default = null
+}
+
+variable "provisioner_webapp_destination" {
+  type    = bool
+  default = null
+}
+
+variable "script" {
   type    = bool
   default = null
 }
@@ -67,36 +102,18 @@ variable "PD" {
   default = "${env("PD")}"
 }
 
-# variable "aws_account_ids" {
-#   type        = list(string)
-#   default     = ["412145925921", "706231857636"]
-# }
+variable "ami_users" {
+  type        = list(string)
+  default     = ["412145925921", "706231857636"]
+}
 
 source "amazon-ebs" "webapp" {
-  # source_ami_filter {
-  #   most_recent = true
-
-  #   filters = {
-  #     name                = "debian-12-*"
-  #     architecture        = "x86_64"
-  #     root-device-name    = "/dev/xvda"
-  #     root-device-type    = "ebs"
-  #     virtualization-type = "hvm"
-  #   }
-  #   owners = ["amazon"]
-  # }
-
   source_ami = "${var.source_ami}"
 
   ami_name        = "${var.ami_name}"
   ami_description = "${var.ami_description}"
   region          = "${var.region}"
   ami_users = "${var.ami_users}"
-
-  # aws_polling {
-  #   delay_seconds = 120
-  #   max_attempts  = 50
-  # }
 
   instance_type = "${var.instance_type}"
   ssh_username  = "${var.ssh_username}"
