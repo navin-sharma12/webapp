@@ -25,27 +25,41 @@ export const post = async (request, response) => {
         return response.status(401).send('');
     }
 
+    const bodyKeys = Object.keys(request.body);
+
+    const requiredKeys = [
+        "name",
+        "points",
+        "num_of_attempts",
+        "deadline",
+    ];
+
+    const optionalKeys = [
+        "assignment_created",
+        "assignment_updated",
+    ];
+
+    // Check if all required keys are present
+    const missingKeys = requiredKeys.filter(key => !bodyKeys.includes(key));
+
+    if (missingKeys.length > 0) {
+        return response.status(400).send("Missing required keys: " + missingKeys.join(", "));
+    }
+
+    // Check if there are any additional keys in the payload
+    const extraKeys = bodyKeys.filter(key => !requiredKeys.includes(key) && !optionalKeys.includes(key));
+
+    if (extraKeys.length > 0) {
+        return response.status(400).send("Invalid keys in the payload: " + extraKeys.join(", "));
+    }
+
     try {
         let newDetails = request.body;
         newDetails.user_id = authenticated;
         newDetails.assignment_created = new Date().toISOString();
         newDetails.assignment_updated = new Date().toISOString();
-        if (
-            bodyKeys.some(
-                (bodyVal) =>
-                    ![
-                        "name",
-                        "points",
-                        "num_of_attempts",
-                        "deadline",
-                    ].includes(bodyVal)
-            )
-        ) {
-            response.status(400).send("");
-        } else {
-            const savedDetails = await addAssignment(newDetails);
-            return response.status(201).send('');
-        }
+        const savedDetails = await addAssignment(newDetails);
+        return response.status(201).send('');
     } catch (error) {
         return response.status(400).send('');
     }
@@ -81,7 +95,10 @@ export const getAssignments = async (request, response) => {
         if (assignments.length === 0) {
             // Handle the case when no assignments are found for the user
             return response.status(404).send('');
-        } else {
+        } if (request.body && Object.keys(request.body).length > 0) {
+            return response.status(400).send();
+        }
+        else {
             // Send the assignments as a JSON response
             return response.status(200).send(assignments);
         }
@@ -115,20 +132,22 @@ export const getAssignmentUsingId = async (request, response) => {
         return response.status(401).send('');
     }
 
-    // const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
-    // if (assignment.user_id != authenticated) {
-    //     return response.status(401).send('');
-    // }
+    const assignment = await db.assignment.findOne({
+        where: { id: request.params.id },
+    });
+    if (!assignment) {
+        return response.status(204).send("");
+    }
 
     try {
         const id = request.params.id;
         const assignments = await getAssignmentById(authenticated, id);
 
         if (assignments.length === 0) {
-            // Handle the case when no assignments are found for the user
             return response.status(404).send('');
+        } if (request.body && Object.keys(request.body).length > 0) {
+            return response.status(400).send();
         } else {
-            // Send the assignments as a JSON response
             return response.status(200).send(assignments);
         }
     } catch (error) {
@@ -164,6 +183,34 @@ export const updatedAssignment = async (request, response) => {
     const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
     if (assignment.user_id != authenticated) {
         return response.status(403).send('');
+    }
+
+    const bodyKeys = Object.keys(request.body);
+
+    const requiredKeys = [
+        "name",
+        "points",
+        "num_of_attempts",
+        "deadline",
+    ];
+
+    const optionalKeys = [
+        "assignment_created",
+        "assignment_updated",
+    ];
+
+    // Check if all required keys are present
+    const missingKeys = requiredKeys.filter(key => !bodyKeys.includes(key));
+
+    if (missingKeys.length > 0) {
+        return response.status(400).send("Missing required keys: " + missingKeys.join(", "));
+    }
+
+    // Check if there are any additional keys in the payload
+    const extraKeys = bodyKeys.filter(key => !requiredKeys.includes(key) && !optionalKeys.includes(key));
+
+    if (extraKeys.length > 0) {
+        return response.status(400).send("Invalid keys in the payload: " + extraKeys.join(", "));
     }
 
     try {
