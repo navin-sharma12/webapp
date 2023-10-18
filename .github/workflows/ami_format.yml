@@ -2,7 +2,7 @@ name: AMI format test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [demo]
 
 jobs:
   connect-remote:

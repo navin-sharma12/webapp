@@ -2,7 +2,7 @@ name: AMI validation test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [demo]
 
 jobs:
   connect-remote:
@@ -34,4 +34,4 @@ jobs:
         run: packer init .
 
       - name: Run Packer validate
-        run: packer validate .
+        run: packer -var-file="variableFile.pkrvars.hcl" validate .
