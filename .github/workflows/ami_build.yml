@@ -51,4 +51,4 @@ jobs:
           export USER=${{ secrets.USER }}
           export PD=${{ secrets.PD }}
           export DATABASE=${{ secrets.DATABASE }}
-          packer build -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' webapp.pkr.hcl
+          packer build -var-file="variablefile.pkrvars.hcl" -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' webapp.pkr.hcl
