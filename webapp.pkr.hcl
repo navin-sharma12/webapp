@@ -115,7 +115,7 @@ variable "ami_regions" {
 source "amazon-ebs" "webapp" {
   source_ami = "${var.source_ami}"
 
-  ami_name        = "${var.ami_name}"
+  ami_name        = "${var.ami_name}_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "${var.ami_description}"
   region          = "${var.aws_region}"
   ami_users       = "${var.ami_users}"
