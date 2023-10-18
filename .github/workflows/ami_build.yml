@@ -30,8 +30,8 @@ jobs:
           sudo mv packer /usr/local/bin/
           packer version
       
-      - name: zip all files
-        run: zip -r webapp.zip .
+      # - name: zip all files
+      #   run: zip -r webapp.zip .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
