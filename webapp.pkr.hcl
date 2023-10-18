@@ -89,22 +89,22 @@ variable "script" {
 
 variable "source_ami" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "ami_name" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "instance_type" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "launch_block_device_mappings_device_name" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "launch_block_device_mappings_volume_size" {
@@ -114,7 +114,7 @@ variable "launch_block_device_mappings_volume_size" {
 
 variable "launch_block_device_mappings_volume_type" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "launch_block_device_mappings_delete_on_termination" {
