@@ -154,10 +154,10 @@ source "amazon-ebs" "webapp" {
   ssh_username  = "${var.ssh_username}"
 
   launch_block_device_mappings {
-    device_name           = var.launch_block_device_mappings_device_name
-    volume_size           = var.launch_block_device_mappings_volume_size
-    volume_type           = var.launch_block_device_mappings_volume_type
-    delete_on_termination = var.launch_block_device_mappings_delete_on_termination
+    device_name           = "${var.launch_block_device_mappings_device_name}"
+    volume_size           = "${var.launch_block_device_mappings_volume_size}"
+    volume_type           = "${var.launch_block_device_mappings_volume_type}"
+    delete_on_termination = "${var.launch_block_device_mappings_delete_on_termination}"
   }
 }
 
@@ -168,17 +168,17 @@ build {
   ]
 
   provisioner "file" {
-    source      = var.provisioner_csv_source
-    destination = var.provisioner_csv_destination
+    source      = "${var.provisioner_csv_source}"
+    destination = "${var.provisioner_csv_destination}"
   }
 
   provisioner "file" {
-    source      = var.provisioner_webapp_source
-    destination = var.provisioner_webapp_destination
+    source      = "${var.provisioner_webapp_source}"
+    destination = "${var.provisioner_webapp_destination}"
   }
 
   provisioner "shell" {
-    script = var.script
+    script = "${var.script}"
     environment_vars = [
       "PD=${var.PD}",
       "DATABASE=${var.DATABASE}",
