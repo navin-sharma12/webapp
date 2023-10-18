@@ -7,15 +7,15 @@ packer {
   }
 }
 
-variable "aws_region" {
-  type    = string
-  default = "us-east-1"
-}
+# variable "aws_region" {
+#   type    = string
+#   default = "us-east-1"
+# }
 
-variable "ssh_username" {
-  type    = string
-  default = "admin"
-}
+# variable "ssh_username" {
+#   type    = string
+#   default = "admin"
+# }
 
 variable "USER" {
   type    = string
@@ -32,67 +32,66 @@ variable "PD" {
   default = "${env("PD")}"
 }
 
-variable "aws_account_ids" {
-  type        = list(string)
-  default     = ["412145925921", "706231857636"]
-}
+# variable "aws_account_ids" {
+#   type        = list(string)
+#   default     = ["412145925921", "706231857636"]
+# }
 
 source "amazon-ebs" "webapp" {
-  source_ami_filter {
-    most_recent = true
+  # source_ami_filter {
+  #   most_recent = true
 
-    filters = {
-      name                = "debian-12-*"
-      architecture        = "x86_64"
-      root-device-name    = "/dev/xvda"
-      root-device-type    = "ebs"
-      virtualization-type = "hvm"
-    }
-    owners = ["amazon"]
-  }
+  #   filters = {
+  #     name                = "debian-12-*"
+  #     architecture        = "x86_64"
+  #     root-device-name    = "/dev/xvda"
+  #     root-device-type    = "ebs"
+  #     virtualization-type = "hvm"
+  #   }
+  #   owners = ["amazon"]
+  # }
 
-  ami_name        = "csye6225_iac_and_webapp_ami"
-  ami_description = "AMI for CSYE6225"
-  region          = "us-east-1"
-  ami_users = [
-    "412145925921",
-    "706231857636"
-  ]
+  source_ami = "${source_ami}"
 
-  aws_polling {
-    delay_seconds = 120
-    max_attempts  = 50
-  }
+  ami_name        = "${ami_name}"
+  ami_description = "${ami_description}"
+  region          = "${region}"
+  ami_users = "${ami_users}"
 
-  instance_type = "t2.micro"
-  ssh_username  = "admin"
+  # aws_polling {
+  #   delay_seconds = 120
+  #   max_attempts  = 50
+  # }
+
+  instance_type = "${instance_type}"
+  ssh_username  = "${ssh_username}"
 
   launch_block_device_mappings {
-    device_name           = "/dev/xvda"
-    volume_size           = 8
-    volume_type           = "gp2"
-    delete_on_termination = true
+    device_name           = "${var.launch_block_device_mappings_device_name}"
+    volume_size           = "${var.launch_block_device_mappings_volume_size}"
+    volume_type           = "${var.launch_block_device_mappings_volume_type}"
+    delete_on_termination = "${var.launch_block_device_mappings_delete_on_termination}"
   }
 }
 
 
 build {
   sources = [
-    "source.amazon-ebs.webapp"
+    "${build_sources}"
   ]
 
   provisioner "file" {
-    source      = "./users.csv"
-    destination = "/home/admin/users.csv"
+    source      = "${var.provisioner_csv_source}"
+    destination = "${var.provisioner_csv_destination}"
   }
 
   provisioner "file" {
-    source = "./webapp.zip"
-    destination = "/home/admin/webapp.zip"
+    source      = "${var.provisioner_webapp_source}"
+    destination = "${var.provisioner_webapp_destination}"
   }
 
   provisioner "shell" {
-    script = "./setup.sh"
+    script = "${var.script}"
     environment_vars = [
       "PD=${var.PD}",
       "DATABASE=${var.DATABASE}",
