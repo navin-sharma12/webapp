@@ -77,7 +77,7 @@ source "amazon-ebs" "webapp" {
 
 build {
   sources = [
-    "${var.build_sources}"
+    "source.amazon-ebs.webapp"
   ]
 
   provisioner "file" {
