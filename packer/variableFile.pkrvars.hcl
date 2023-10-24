@@ -1,7 +1,7 @@
 aws_region                                         = "us-east-1"
 ssh_username                                       = "admin"
 ami_users                                          = ["412145925921", "706231857636"]
-ami_regions                                        = ["us-east-1", "us-west-1"]
+ami_regions                                        = ["us-east-1"]
 source_ami                                         = "ami-06db4d78cb1d3bbf9"
 ami_name                                           = "csye6225_iac_and_webapp_ami"
 ami_description                                    = "AMI for CSYE6225"
@@ -14,4 +14,6 @@ provisioner_csv_source                             = "./users.csv"
 provisioner_csv_destination                        = "/home/admin/users.csv"
 provisioner_webapp_source                          = "./webapp.zip"
 provisioner_webapp_destination                     = "/home/admin/webapp.zip"
-script                                             = "./setup.sh"
+script                                             = "../script/setup.sh"
+systemd_source                                     = "./webapp.service"
+systemd_destination                                = "/home/admin/"

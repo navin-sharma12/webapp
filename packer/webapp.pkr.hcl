@@ -9,82 +9,77 @@ packer {
 
 variable "aws_region" {
   type    = string
-  default = null
+  default = "us-east-1"
 }
 
 variable "ssh_username" {
   type    = string
-  default = null
+  default = "admin"
 }
 
 variable "source_ami" {
   type    = string
-  default = null
+  default = "ami-06db4d78cb1d3bbf9"
 }
 
 variable "ami_description" {
   type    = string
-  default = null
+  default = "AMI for CSYE6225"
 }
 
 variable "instance_type" {
   type    = string
-  default = null
+  default = "t2.micro"
 }
 
 variable "launch_block_device_mappings_volume_size" {
   type    = number
-  default = null
+  default = 8
 }
 
 variable "launch_block_device_mappings_volume_type" {
   type    = string
-  default = null
+  default = "gp2"
 }
 
 variable "launch_block_device_mappings_delete_on_termination" {
   type    = bool
-  default = null
-}
-
-variable "build_sources" {
-  type    = string
-  default = null
+  default = true
 }
 
 variable "provisioner_csv_source" {
   type    = string
-  default = null
+  default = "./users.csv"
 }
 
 variable "provisioner_csv_destination" {
   type    = string
-  default = null
+  default = "/home/admin/users.csv"
 }
 
 variable "provisioner_webapp_source" {
   type    = string
-  default = null
+  default = "./webapp.zip"
 }
 
 variable "provisioner_webapp_destination" {
   type    = string
-  default = null
+  default = "/home/admin/webapp.zip"
 }
 
 variable "script" {
   type    = string
-  default = null
+  default = "../script/setup.sh"
 }
 
 variable "ami_name" {
   type    = string
-  default = null
+  default = "csye6225_iac_and_webapp_ami"
 }
 
 variable "launch_block_device_mappings_device_name" {
   type    = string
-  default = null
+  default = "/dev/xvda"
 }
 
 variable "USER" {
@@ -104,12 +99,22 @@ variable "PD" {
 
 variable "ami_users" {
   type    = list(string)
-  default = null
+  default = ["412145925921", "706231857636"]
 }
 
 variable "ami_regions" {
   type    = list(string)
-  default = null
+  default = ["us-east-1"]
+}
+
+variable "systemd_source" {
+  type    = string
+  default = "./webapp.service"
+}
+
+variable "systemd_destination" {
+  type    = string
+  default = "/home/admin/opt/"
 }
 
 source "amazon-ebs" "webapp" {
@@ -146,6 +151,11 @@ build {
   provisioner "file" {
     source      = "${var.provisioner_webapp_source}"
     destination = "${var.provisioner_webapp_destination}"
+  }
+
+  provisioner "file" {
+    source      = "${var.systemd_source}"
+    destination = "${var.systemd_destination}"
   }
 
   provisioner "shell" {
