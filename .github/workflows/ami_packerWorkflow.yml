@@ -13,16 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: create and configure
-        run: |
-          touch .env
-          echo port=${{ secrets.PORT }} >> .env
-          echo host=${{ secrets.HOST }} >> .env
-          echo dialect=${{ secrets.DIALECT }} >> .env
-          echo user=${{ secrets.USER }} >> .env
-          echo pd=${{ secrets.PD }}>> .env
-          echo database=${{ secrets.DATABASE }} >> .env
 
       - name: zip all files
         run: zip -r webapp.zip .
