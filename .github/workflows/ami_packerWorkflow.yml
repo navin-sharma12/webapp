@@ -32,7 +32,7 @@ jobs:
           wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
           unzip packer_1.7.2_linux_amd64.zip
           chmod +x packer
-          sudo mv packer /usr/local/bin/
+          sudo mv packer /usr/local/bin/ -A
           packer version
       
       - name: Run Packer pulgin installation
