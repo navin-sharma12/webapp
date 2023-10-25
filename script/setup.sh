@@ -8,7 +8,7 @@ sudo apt install nodejs npm -y
 sudo mkdir opt
 sudo mv /home/admin/webapp.zip /home/admin/opt/webapp.zip
 cd opt
-sudo unzip -o webapp.zip
+sudo unzip -o webapp.zip -d /home/admin/opt/webapp
 cd webapp
 sudo npm i
 sudo groupadd csye6225
