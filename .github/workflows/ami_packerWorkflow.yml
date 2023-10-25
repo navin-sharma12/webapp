@@ -35,11 +35,11 @@ jobs:
           sudo mv /tmp/packer /usr/local/bin/
           packer version
       
-      # - name: Run Packer pulgin installation
-      #   run: packer init .
+      - name: Run Packer pulgin installation
+        run: packer init ./packer/webapp.pkr.hcl
 
       - name: Run Packer fmt
-        run: packer fmt -check .
+        run: packer fmt -check ./packer/webapp.pkr.hcl
 
       - name: Run Packer validate
-        run: packer validate -var-file="variableFile.pkrvars.hcl" webapp.pkr.hcl
+        run: packer validate -var-file="variableFile.pkrvars.hcl" ./packer/webapp.pkr.hcl
