@@ -28,9 +28,9 @@ jobs:
       - name: Install Packer
         run: |
           wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
-          unzip packer_1.7.2_linux_amd64.zip
-          chmod +x packer
-          sudo mv packer /usr/local/bin/
+          unzip -o packer_1.7.2_linux_amd64.zip -d /tmp
+          chmod +x /tmp/packer
+          sudo mv /tmp/packer /usr/local/bin/
           packer version
 
       - name: Configure AWS credentials
@@ -40,8 +40,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Run Packer plugin installation
-        run: packer init .
+      - name: Run Packer pulgin installation
+        run: packer init ./packer/webapp.pkr.hcl
 
       - name: Run Packer file
-        run: packer build -var-file="variableFile.pkrvars.hcl" webapp.pkr.hcl
+        run: packer build -var-file="./packer/variableFile.pkrvars.hcl" ./packer/webapp.pkr.hcl
