@@ -114,7 +114,7 @@ variable "systemd_source" {
 
 variable "systemd_destination" {
   type    = string
-  default = "/home/admin/opt/"
+  default = "/home/admin/"
 }
 
 source "amazon-ebs" "webapp" {
