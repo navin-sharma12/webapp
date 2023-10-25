@@ -30,8 +30,8 @@ jobs:
       - name: Install Packer
         run: |
           wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
-          unzip -o packer_1.7.2_linux_amd64.zip
-          chmod +x packer
+          sudo unzip -o packer_1.7.2_linux_amd64.zip
+          sudo chmod +x packer
           sudo mv packer /usr/local/bin/
           packer version
       
