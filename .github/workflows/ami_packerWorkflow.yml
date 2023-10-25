@@ -30,16 +30,16 @@ jobs:
       - name: Install Packer
         run: |
           wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
-          unzip packer_1.7.2_linux_amd64.zip
-          chmod +x packer
-          sudo mv packer /usr/local/bin/
+          unzip -o packer_1.7.2_linux_amd64.zip -d /tmp
+          chmod +x /tmp/packer
+          sudo mv /tmp/packer /usr/local/bin/
           packer version
       
       - name: Run Packer pulgin installation
-        run: packer init .
+        run: packer init ./packer/webapp.pkr.hcl
 
       - name: Run Packer fmt
-        run: packer fmt -check .
+        run: packer fmt -check ./packer/webapp.pkr.hcl
 
       - name: Run Packer validate
-        run: packer validate -var-file="variableFile.pkrvars.hcl" -var 'USER=${{ secrets.USER }}' -var 'DATABASE=${{ secrets.DATABASE }}' -var 'PD=${{ secrets.PD }}' webapp.pkr.hcl
+        run: packer validate -var-file="./packer/variableFile.pkrvars.hcl" ./packer/webapp.pkr.hcl
