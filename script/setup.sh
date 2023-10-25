@@ -5,10 +5,9 @@ sudo apt-get upgrade -y
 sudo apt-get install systemd
 sudo apt install unzip
 sudo apt install nodejs npm -y
-sudo mkdir opt
-sudo mv /home/admin/webapp.zip /home/admin/opt/webapp.zip
+sudo mv /home/admin/webapp.zip /opt/csye6225/webapp.zip
 cd opt
-sudo unzip -o webapp.zip -d /home/admin/opt/webapp
+sudo unzip -o webapp.zip -d /opt/csye6225/webapp
 cd webapp
 sudo npm i
 sudo groupadd csye6225

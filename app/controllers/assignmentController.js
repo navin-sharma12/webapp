@@ -144,7 +144,7 @@ export const getAssignmentUsingId = async (request, response) => {
         const assignments = await getAssignmentById(authenticated, id);
 
         if (assignments.length === 0) {
-            return response.status(404).send('');
+            return response.status(200).send('');
         } if (request.body && Object.keys(request.body).length > 0) {
             return response.status(400).send();
         } else {
@@ -181,6 +181,8 @@ export const updatedAssignment = async (request, response) => {
     }
 
     const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
+    if(!assignment) return response.status(404).send('');
+
     if (assignment.user_id != authenticated) {
         return response.status(403).send('');
     }
@@ -218,7 +220,7 @@ export const updatedAssignment = async (request, response) => {
         let newDetails = request.body;
         newDetails.assignment_updated = new Date().toISOString();
         const updatedDetails = await updateAssignment(newDetails, id);
-        return response.status(200).send('');
+        return response.status(204).send('');
     } catch (error) {
         return response.status(400).send('');
     }
@@ -249,6 +251,9 @@ export const remove = async (request, response) => {
     }
 
     const assignment = await db.assignment.findOne({ where: { id: request.params.id } });
+
+    if(!assignment) return response.status(404).send('');
+
     if (assignment.user_id != authenticated) {
         return response.status(403).send('');
     }
@@ -256,7 +261,7 @@ export const remove = async (request, response) => {
     try {
         const id = request.params.id;
         await removeAssignment(id);
-        return response.status(200).send('');
+        return response.status(204).send('');
     } catch (error) {
         return response.status(400).send('');
     }
