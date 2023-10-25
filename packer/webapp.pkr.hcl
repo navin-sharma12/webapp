@@ -82,21 +82,6 @@ variable "launch_block_device_mappings_device_name" {
   default = "/dev/xvda"
 }
 
-variable "USER" {
-  type    = string
-  default = "${env("USER")}"
-}
-
-variable "DATABASE" {
-  type    = string
-  default = "${env("DATABASE")}"
-}
-
-variable "PD" {
-  type    = string
-  default = "${env("PD")}"
-}
-
 variable "ami_users" {
   type    = list(string)
   default = ["412145925921", "706231857636"]
@@ -160,10 +145,5 @@ build {
 
   provisioner "shell" {
     script = "${var.script}"
-    environment_vars = [
-      "PD=${var.PD}",
-      "DATABASE=${var.DATABASE}",
-      "USER=${var.USER}"
-    ]
   }
 }
