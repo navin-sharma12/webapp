@@ -133,3 +133,4 @@ dist
 .DS_Store
 package-lock.json
 Pulumi.*.yaml
+*.zip
