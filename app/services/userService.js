@@ -7,7 +7,7 @@ const currentDate = new Date();
 const accountCreatedString = currentDate.toISOString();
 const accountUpdatedString = currentDate.toISOString();
 
-const initializeDatabase=async () => {
+const initializeDatabase = async () => {
     try {
         // Sync the database to create tables if they don't exist
         await db.sequelize.sync({ alter: true }); // Use alter: true to update existing schema
@@ -27,11 +27,11 @@ const initializeDatabase=async () => {
                 account_created: accountCreatedString,
                 account_updated: accountUpdatedString
             });
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        }
 
-        console.log('Database bootstrapped successfully.');
+        console.log("Database bootstrapped successfully.");
     } catch (error) {
-        console.log('');
+        console.log("error", error);
     }
 }
 

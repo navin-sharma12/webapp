@@ -1,8 +1,13 @@
 import { authenticate, addAssignment, removeAssignment, getAllAssignments, getAssignmentById, updateAssignment, healthCheck } from "../services/assignmentService.js";
 import db from "../config/dbSetup.js";
+import StatsD from "node-statsd";
+import appLogger from "../config/logger.js";
+const statsd = new StatsD({ host: "127.0.0.1", port: 8125 });
 
 //Create assignment
 export const post = async (request, response) => {
+
+    statsd.increment("endpoint.post.assignment");
 
     const health = await healthCheck();
     if (health !== true) {
@@ -59,6 +64,7 @@ export const post = async (request, response) => {
         newDetails.assignment_created = new Date().toISOString();
         newDetails.assignment_updated = new Date().toISOString();
         const savedDetails = await addAssignment(newDetails);
+        appLogger.info("Post successfull.");
         return response.status(201).send('');
     } catch (error) {
         return response.status(400).send('');

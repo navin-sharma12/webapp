@@ -102,6 +102,16 @@ variable "systemd_destination" {
   default = "/home/admin/"
 }
 
+variable "cloud_watch_agent_source" {
+  type    = string
+  default = "./cloudwatch-config.json"
+}
+
+variable "cloud_watch_agent_destination" {
+  type    = string
+  default = "/home/admin/"
+}
+
 source "amazon-ebs" "webapp" {
   source_ami = "${var.source_ami}"
 
@@ -141,6 +151,11 @@ build {
   provisioner "file" {
     source      = "${var.systemd_source}"
     destination = "${var.systemd_destination}"
+  }
+
+  provisioner "file" {
+    source      = "${var.cloud_watch_agent_source}"
+    destination = "${var.cloud_watch_agent_destination}"
   }
 
   provisioner "shell" {
