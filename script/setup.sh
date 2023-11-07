@@ -16,6 +16,9 @@ sudo cp /opt/csye6225/webapp/cloudwatch-config.json /opt/aws/amazon-cloudwatch-a
 ls
 cd /opt/csye6225/webapp
 ls
+sudo cp /home/admin/cloudwatch-config.json /opt/csye6225/webapp/cloudwatch-config.json
+sudo mv /home/admin/webapp.zip /opt/csye6225/webapp.zip
+sudo cp /opt/csye6225/webapp/cloudwatch-config.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 sudo npm i
 sudo cp /home/admin/webapp.service /etc/systemd/system/
 sudo systemctl daemon-reload
