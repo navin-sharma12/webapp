@@ -10,5 +10,7 @@ export default {
         database: process.env.database,
         dialect: process.env.dialect,
         port: process.env.port,
+        statsdhost: process.env.statsdhost,
+        statsdPort: process.env.statsdPort,
     },
 };
