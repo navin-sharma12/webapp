@@ -12,5 +12,6 @@ export default {
         port: process.env.port,
         statsdhost: process.env.statsdhost,
         statsdPort: process.env.statsdPort,
+        TopicArn: process.env.TopicArn,
     },
 };

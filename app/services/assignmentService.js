@@ -70,3 +70,27 @@ export const healthCheck = async () => {
         return false;
     }
 }
+
+//add a new submission
+export const addSubmission = async (newDetails) => {
+    try {
+        await db.sequelize.sync({ alter: true });
+        const submission = await db.submission.create(newDetails);
+        return submission;
+    } catch (error) {
+        console.error("Error submitting the assignment:");
+        throw error;
+    }
+}
+
+//get all the submissions
+export const getSubmissionById = async (user_id, assignment_id) => {
+    try {
+        const submission = await db.submission.findAll({
+            where: { user_id: user_id, assignment_id: assignment_id },
+        });
+        return submission;
+    } catch (error) {
+        throw null;
+    }
+}

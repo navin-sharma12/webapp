@@ -22,10 +22,6 @@ const assignmentModel = (sequelize) => {
         },
         num_of_attempts: {
             type: DataTypes.INTEGER,
-            validate: {
-                min: 1,
-                max: 100,
-            },
         },
         deadline: {
             type: DataTypes.DATE,
