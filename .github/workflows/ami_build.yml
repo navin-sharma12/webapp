@@ -2,7 +2,7 @@ name: AMI build
 
 on:
   push:
-    branches: [main]
+    branches: [temp]
 
 jobs:
   connect-remote:
@@ -35,3 +35,8 @@ jobs:
 
       - name: Run Packer file
         run: packer build -var-file="./packer/variableFile.pkrvars.hcl" ./packer/webapp.pkr.hcl
+      
+      - name: Get latest AMI ID
+        run: |
+          latest_ami=$(aws ec2 describe-images --filters "Name=name,Values=<AMI_NAME>" --query "Images | [0].ImageId" --output text)
+          echo "Latest AMI ID: $latest_ami"
