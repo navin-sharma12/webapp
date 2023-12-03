@@ -17,10 +17,10 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ${{ secrets.AWS_REGION }}
 
-      - name: Get Latest AMI ID
-        id: get-ami
+      - name: Get latest AMI ID
+        id: get-ami-id
         run: |
-          latest_ami_id=$(aws ec2 describe-images --query 'Images[?Name==`csye6225*`].ImageId' --output text)
+          latest_ami_id=$(aws ec2 describe-images --filters "Name=name,Values=csye6225*" --query 'Images[0].ImageId' --output text)
           echo "::set-output name=ami_id::$latest_ami_id"
       
       - name: Print Latest AMI ID
