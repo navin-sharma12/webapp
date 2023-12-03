@@ -22,3 +22,7 @@ jobs:
         run: |
           latest_ami_id=$(aws ec2 describe-images --query 'Images[?Name==`csye6225*`].ImageId' --output text)
           echo "::set-output name=ami_id::$latest_ami_id"
+      
+      - name: Print Latest AMI ID
+        run: |
+          echo "Latest AMI ID: ${{ steps.get-ami.outputs.ami_id }}"
