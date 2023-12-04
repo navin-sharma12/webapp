@@ -39,7 +39,7 @@ jobs:
       - name: Get latest AMI ID
         id: ami
         run: |
-          latest_ami=$(aws ec2 describe-images --filters "Name=name,Values=csye6225*" --query "Images | [0].ImageId" --output text)
+          echo "::set-output name=ami_id::$(aws ec2 describe-images --filters 'Name=name,Values=csye6225*' --query 'Images[0].ImageId' --output text)"
 
       - name: Create Launch Template
         run: |
