@@ -99,3 +99,25 @@ http://localhost:3000/healthz/, where you should see: "200 OK".
 http://localhost:3000/v1/assignments/self where you should see: "204 No Content".
 
 http://localhost:3000/v1/assignments/self where you should use: "204 No Content".
+
+
+# AWS ACM Certificate Import
+
+This repository includes the command to import an SSL certificate into AWS Certificate Manager (ACM).
+
+## Prerequisites
+
+- AWS CLI installed and configured with the necessary permissions.
+- SSL certificate files:
+  - Certificate file (e.g., `demo_navinsharma_me.crt`)
+  - Private key file (e.g., `navin.pem`)
+  - Certificate chain file (e.g., `demo_navinsharma_me.ca-bundle`)
+
+## Import Certificate
+
+Use the following AWS CLI command to import the SSL certificate into ACM:
+
+aws acm import-certificate \
+  --certificate fileb:///Users/navinsharma/Documents/certificates/demo_navinsharma_me/demo_navinsharma_me.crt \
+  --private-key fileb:///Users/navinsharma/Documents/certificates/navin.pem \
+  --certificate-chain fileb:///Users/navinsharma/Documents/certificates/demo_navinsharma_me/demo_navinsharma_me.ca-bundle

@@ -56,11 +56,11 @@ jobs:
         run: |
           aws autoscaling start-instance-refresh --auto-scaling-group-name ${{ secrets.AUTOSCALING_GROUP }}
           status=""
-          while [[ $status != "Successful" && $status != "Failed" ]]; do
+          while [[ $status != "Successful" || $status != "Failed" || $status != "Cancelled"]]; do
             status=$(aws autoscaling describe-instance-refreshes --auto-scaling-group-name ${{ secrets.AUTOSCALING_GROUP }} --query 'InstanceRefreshes[0].Status' --output text)
           done
           echo "Instance refresh status: $status"
-          if [ $status == "Failed" ]; then
-            echo "Instance refresh failed. Exiting with an error."
+          if [ $status != "Successful" ]; then
+            echo "Instance refresh unsuccessfull. Exiting with an error."
             exit 1
           fi
