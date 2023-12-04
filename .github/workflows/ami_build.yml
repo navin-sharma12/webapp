@@ -43,7 +43,7 @@ jobs:
 
       - name: Create Launch Template
         run: |
-          aws ec2 create-launch-template-version --launch-template-name launchtemplate-ecd9475 --source-version 1 --launch-template-data "{\"ImageId\":\"$latest_ami\"}"
+          aws ec2 create-launch-template-version --launch-template-name launchtemplate-ecd9475 --source-version 1 --launch-template-data "{ImageId:$latest_ami}"
           latest_version=$(aws ec2 describe-launch-template-versions --launch-template-name launchtemplate-ecd9475 --query "LaunchTemplateVersions[-1].VersionNumber" --output text)
           aws ec2 modify-launch-template-default-version --launch-template-name launchtemplate-ecd9475 --default-version "$latest_version"
 
