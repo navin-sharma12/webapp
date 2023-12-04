@@ -43,4 +43,4 @@ jobs:
 
       - name: Create Launch Template
         run: |
-          aws ec2 create-launch-template-version --launch-template-name launchtemplate* --source-version 1 --launch-template-data '{"ImageId":"$latest_ami"}'
+          aws ec2 create-launch-template-version --launch-template-name launchtemplate-d01b864 --source-version 1 --launch-template-data '{"ImageId":"$latest_ami"}'
