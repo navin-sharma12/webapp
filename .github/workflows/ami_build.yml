@@ -43,7 +43,7 @@ jobs:
 
       - name: Create Launch Template
         run: |
-          aws ec2 create-launch-template-version --launch-template-name ${{ secrets.LAUNCH_TEMPLATE }} --source-version 2 --launch-template-data '{"ImageId":"${{ steps.ami.outputs.ami_id }}"}'
+          aws ec2 create-launch-template-version --launch-template-name ${{ secrets.LAUNCH_TEMPLATE }} --source-version 1 --launch-template-data '{"ImageId":"${{ steps.ami.outputs.ami_id }}"}'
 
       - name: Refresh autoscaling group
         run: |
