@@ -40,6 +40,13 @@ jobs:
         id: ami
         run: |
           echo "::set-output name=ami_id::$(aws ec2 describe-images --filters 'Name=name,Values=csye6225*' --query 'Images[0].ImageId' --output text)"
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.DEMO_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.DEMO_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.DEMO_AWS_REGION }}
 
       - name: Create Launch Template
         run: |
@@ -50,7 +57,6 @@ jobs:
           aws autoscaling start-instance-refresh --auto-scaling-group-name ${{ secrets.AUTOSCALING_GROUP }}
           status=""
           while [[ $status != "Successful" && $status != "Failed" ]]; do
-            sleep 60
             status=$(aws autoscaling describe-instance-refreshes --auto-scaling-group-name ${{ secrets.AUTOSCALING_GROUP }} --query 'InstanceRefreshes[0].Status' --output text)
           done
           echo "Instance refresh status: $status"
