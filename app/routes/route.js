@@ -11,7 +11,7 @@ router.route('/healthz').all(assignmentController.healthz);
 router.route('/v2/assignments/:id').get(assignmentController.getAssignmentUsingId);
 router.route('/v2/:id/submission').post(assignmentController.submission);
 router.use((req, res) => {
-    res.status(404).send('');
+    res.status(405).send('');
 });
 
 export default router;
