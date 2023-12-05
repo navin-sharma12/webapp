@@ -56,7 +56,7 @@ jobs:
         run: |
           aws autoscaling start-instance-refresh --auto-scaling-group-name ${{ secrets.AUTOSCALING_GROUP }}
           status=""
-          while [[ $status != "Successful" && $status != "Failed" && $status != "Cancelled"]]; do
+          while [[ $status != "Successful" && $status != "Failed" && $status != "Cancelled" ]]; do
             status=$(aws autoscaling describe-instance-refreshes --auto-scaling-group-name ${{ secrets.AUTOSCALING_GROUP }} --query 'InstanceRefreshes[0].Status' --output text)
           done
           echo "Instance refresh status: $status"
